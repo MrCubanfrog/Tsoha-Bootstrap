@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Muokkaa kohdetta 1. Haakserikko</h1>
+    <form>
+        <div class="form-group">
+            <label>Session Nimi</label>
+            <input class="form-control" value="Uinuvan Jumalan Saari" type="text">
+        </div>
+        <div class="form-group">
+            <label>Kuvaus</label>
+            <input class="form-control" value="Pelaajat haakserikkoutuvat orjalaivavllaan Ithrumin saaren rannikolle. Mutta kuinkas sitten kävikään." type="text">
+        </div>
+        <div class="form-group">
+            <label>Session Kulku</label>
+            <input class="form-control" value="Tähän tulee pitempi kuvaus siitä mitä pelissä tapahtui. Pelaajat haakserikkoutuivat rannalle, jonka jälkeen he alkoivat tutkia <a href="#">Ithrumin</a> saarta." type="text">
+        </div>
+        <div class="form-group">
+            <label>Pelinjohtajan osio</label>
+            <input class="form-control" value="Tähän tulee salaista informaatiota pelin kulusta." type="text">
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Tallenna</button>
+            <button type="submit" class="btn btn-danger">Poista</button>
+        </div>
+    </form>
+
+    <h1>1. Haakserikko</h1>
+    Pelaajat haakserikkoutuvat orjalaivavllaan Ithrumin saaren rannikolle. Mutta kuinkas sitten kävikään.
+    <h1>Mitä sessiossa tapahtui</h1>
+    Tähän tulee pitempi kuvaus siitä mitä pelissä tapahtui. Pelaajat haakserikkoutuivat rannalle, jonka jälkeen he alkoivat tutkia <a href="#">Ithrumin</a> saarta. 
+    <h1>Pelinjohtajan osuus</h1>
+    Tähän tulee salaista informaatiota pelin kulusta.
+{% endblock %}

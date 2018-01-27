@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Muokkaa Artikkelia Ithrum</h1>
+    <form>
+        <div class="form-group">
+            <label>Nimi</label>
+            <input class="form-control" value="Ithrum">
+        </div>
+        <div class="form-group">
+            <label>Kuvaus</label>
+            <input class=form-control value="Saari johon koko peli sijoittuu. Paljon mysteereitä ja muuta jännää.">
+        </div>
+        <div class="form-group">
+            <label>Pelinjohtajan osio</label>
+            <input class=form-control value="Tähän voi kirjoittaa salaisia osuuksia pelin artikkeleista, joita ei nää, ellei ole itse pelinjohtaja.">
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Tallenna</button>
+            <button type="submit" class="btn btn-danger">Poista</button>
+        </div>
+    </form>
+{% endblock %}
