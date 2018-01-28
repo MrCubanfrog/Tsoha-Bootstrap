@@ -2,7 +2,7 @@
 
 Yleisiä linkkejä:
 
-* [Linkki sovellukseeni](ilmosalm.users.cs.helsinki.fi/tsoha/)
+* [Linkki sovellukseeni](https://ilmosalm.users.cs.helsinki.fi/tsoha/)
 * [Linkki dokumentaatiooni](https://www.github.com/MrCubanfrog/Tsoha-bootstrap/doc/dokumentaatio.pdf)
 
 ## Työn aihe
