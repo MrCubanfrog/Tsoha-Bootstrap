@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+    <p>
+        <button class="btn btn-default">Muokkaa</button>
+    </p>
+    <h1>{{game.name}}</h1>
+    {{game.description}}
+
+    <h1>Hahmot</h1>
+    <h2><a href="#">Carl</a></h2>
+    Nuorehko Hiisi varas, jonka aarteiden himon ylittää ainostaan hänen pelkuruutensa.
+    <h2><a href="#">Jurgen</a></h2>
+    Nuori Örkki taistelija. Huonot hermot yhdistettynä vihanhallinta ongelmiin. Luontainen taistelija siis.
+
+    <h1>Sessiot</h1>
+    <p>
+        <a href="#" class="btn btn-success">Uusi peli</a>
+    </p>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Sessio</th>
+                <th>Kuvaus</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>1. Haakserikko</th>
+                <th>Pelaajat haakserikkouvat orjalaivallaan Ithrumin saaren rannikolle. Mutta kuinkas sitten kävikään</th>
+                <th><a href="#" class="btn btn-success">Sivulle</a></th>
+            </tr>
+        </tbody>
+
+{% endblock %}

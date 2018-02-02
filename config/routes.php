@@ -1,19 +1,15 @@
 <?php
 
-  $routes->get('/', function() {
-    HelloWorldController::index();
-  });
-
-  $routes->get('/hiekkalaatikko', function() {
-    HelloWorldController::sandbox();
-  });
-   
-    $routes->get('/games', function(){
-        HelloWorldController::games_list();
+    $routes->get('/', function() {
+        GamesController::index();
     });
 
-    $routes->get('/game/1', function(){
-        HelloWorldController::game();
+    $routes->get('/game', function(){
+        GameController::index();
+    });
+
+    $routes->get('/game/:id', function($id){
+        GamesController::show($id);
     });
 
     $routes->get('/game_mod/1', function(){

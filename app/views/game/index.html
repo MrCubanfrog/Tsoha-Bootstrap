@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <h1>Kuvaus</h1>
+    Tältä sivustolta löytyy omia pelikuvauksiani. Alhaalta löytyy linkit peleihin.
+
+    <p>
+        <a href="{{base_path}}/game/new" class="btn btn-success">Lisää peli</a>
+    </p>
+
+    <h1>Pelit</h1>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Nimi</th>
+                <th>Systeemi</th>
+                <th>Kuvaus</th>
+                <th>Viimeisin päivitys</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for game in games %}
+                <tr>
+                    <td><a href="{{base_path}}/game/{{game.id}}">{{game.name}}</td>
+                    <td>{{game.system}}</td>
+                    <td>{{game.description_short}}</td>
+                    <td>{{game.creation_info.creation_date}}</td>
+                    <td><a class="btn btn-success" href="{{base_path}}/game/{{game.id}}/edit">Muokkaa</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+
+{% endblock %}

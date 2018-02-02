@@ -4,7 +4,6 @@ CREATE TABLE creation_date(
 	creation_date TIMESTAMP DEFAULT LOCALTIMESTAMP
 );
 
-
 CREATE TABLE site_user (
 	id SERIAL PRIMARY KEY,
 	name VARCHAR(32),
