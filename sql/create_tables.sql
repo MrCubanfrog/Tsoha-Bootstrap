@@ -1,15 +1,9 @@
 -- Lisää CREATE TABLE lauseet tähän tiedostoon
-CREATE TABLE creation_date(
-	id SERIAL PRIMARY KEY,
-	creation_date TIMESTAMP DEFAULT LOCALTIMESTAMP
-);
-
 CREATE TABLE site_user (
 	id SERIAL PRIMARY KEY,
 	name VARCHAR(32),
 	password VARCHAR(64),
-	admin BOOLEAN,
-	creation_id INTEGER REFERENCES creation_date(id)	
+	admin BOOLEAN
 );
 
 CREATE TABLE game (
@@ -18,8 +12,7 @@ CREATE TABLE game (
 	system VARCHAR(32),
 	description_short VARCHAR(128),
 	description TEXT,
-	gm_note TEXT,
-	creation_id INTEGER REFERENCES creation_date(id)	
+	gm_note TEXT
 );
 
 CREATE TABLE game_session (
@@ -27,10 +20,8 @@ CREATE TABLE game_session (
 	game_id INTEGER REFERENCES game(id),
 	name VARCHAR(64),
 	description TEXT,
-	gm_note TEXT,
-	creation_id INTEGER REFERENCES creation_date(id)	
+	gm_note TEXT
 );
-
 
 CREATE TABLE player_character (
 	id SERIAL PRIMARY KEY,
@@ -41,14 +32,12 @@ CREATE TABLE player_character (
 	description TEXT,
 	history TEXT,
 	gm_note TEXT,
-	creation_id INTEGER REFERENCES creation_date(id)	
 );
 
 CREATE TABLE game_users(
 	user_id INTEGER REFERENCES site_user(id),
 	game_id INTEGER REFERENCES game(id),
-	gamemaster BOOLEAN,
-	creation_id INTEGER REFERENCES creation_date(id),
+	gamemaster BOOLEAN
 	PRIMARY KEY(user_id, game_id)
 );
 
@@ -57,6 +46,5 @@ CREATE TABLE article (
 	game_id INTEGER REFERENCES game(id),
 	name VARCHAR(64),
 	description TEXT,
-	gm_note TEXT,
-	creation_id INTEGER REFERENCES creation_date(id)	
+	gm_note TEXT
 );

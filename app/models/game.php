@@ -2,10 +2,36 @@
 
   class Game extends BaseModel{
 
-    public $id, $name, $system, $description_short, $description, $gm_note, $creation_info;
+    public $id, $name, $system, $description_short, $description, $gm_note;
 
     public function __construct($attributes) {
         parent::__construct($attributes);
+        $this->validators = array('validate_name', 'validate_system', 'validate_description', 'validate_description_short', 'validate_gm_note');
+    }
+
+    public function validate_name(){
+        $errors = $this->validate_string_len("Name", $this->name, 0, 64);;
+        return $errors;
+    }
+
+    public function validate_system(){
+        $errors = $this->validate_string_len("System", $this->system, 0, 32);
+        return $errors;
+    }
+
+    public function validate_description(){
+        $errors = $this->validate_string_len("Description", $this->system, 0, -1);
+        return $errors;
+    }
+
+    public function validate_description_short(){
+        $errors = $this->validate_string_len("Description_short", $this->system, 0, 128);
+        return $errors;
+    }
+
+    public function validate_gm_note(){
+        $errors = $this->validate_string_len("Dm note", $this->gm_note, 0, -1);
+        return $errors;
     }
 
     public static function all(){
@@ -17,10 +43,6 @@
         $games = array();
 
         foreach($rows as $row) {
-            $query = DB::connection()->prepare('SELECT * from creation_date WHERE id = :id');
-            $query->execute(array('id'=>$row['creation_id']));
-            $creation_info = $query->fetch();
-
             $games[] = new Game(array(
                 'id' => $row['id'],
                 'name' => $row['name'],
@@ -28,24 +50,27 @@
                 'description_short' => $row['description_short'],
                 'description' => $row['description'],
                 'gm_note' => $row['gm_note'],
-                'creation_info' => array('id'=>$creation_info['id'], 'creation_date'=>$creation_info['creation_date'])
             ));
         }
         return $games;
     }
 
-    public static function save() {
-        $creation_query = DB::connection()->prepare('INSERT INTO creation_date DEFAULT VALUES RETURNING id');
-        $creation_query()->execute()
-        $creation_date = $query->fetchone()
+    public function destroy() {
+        $query = DB::connection()->prepare('DELETE FROM game WHERE id = :id');
+        $query->execute(array('id'=>$this->id));
+    }
 
-        $query = DB::connection()->prepare('INSERT INTO game (name, system, short_description, description, gm_note, creation_id) VALUES (:name, :system, :short_description, :description, :gm_note, :creation_id)');
+    public function update() {
+        $query = DB::connection()->prepare('UPDATE game SET name = :name, system = :system, description_short = :description_short, description = :description, gm_note = :gm_note WHERE id = :id');
+        $query->execute(array('name' => $this->name, 'system' => $this->system, 'description_short' => $this->description_short, 'description' => $this->description, 'gm_note' => $this->gm_note, 'id' => $this->id));
+    }
 
-        $query->execute(array('name' => $this.name, 'system' => $this.system, 'short_description' => $this.short_description, 'description' => $this.description, 'gm_note' => $this.gm_note, 'creation_id' => $creation_date['id']));
-
+    public function save() {
+        $query = DB::connection()->prepare('INSERT INTO game (name, system, description_short, description, gm_note) VALUES (:name, :system, :description_short, :description, :gm_note) RETURNING id');
+        $query->execute(array('name' => $this->name, 'system' => $this->system, 'description_short' => $this->description_short, 'description' => $this->description, 'gm_note' => $this->gm_note));
         $row = $query->fetch();
-        Kint::trace();
-        Kint::dump($row);
+
+        $this->id = $row['id'];
     }
 
     public static function find($id) {
@@ -54,10 +79,6 @@
         $row = $query->fetch();
     
         if ($row) {
-            $query = DB::connection()->prepare('SELECT * from creation_date WHERE id = :id');
-            $query->execute(array('id'=>$row['creation_id']));
-            $creation_info = $query->fetch();
-
             $game = new Game(array(
                 'id' => $row['id'],
                 'name' => $row['name'],
@@ -65,12 +86,10 @@
                 'description_short' => $row['description_short'],
                 'description' => $row['description'],
                 'gm_note' => $row['gm_note'],
-                'creation_info' => array('id'=>$creation_info['id'], 'creation_date'=>$creation_info['creation_date'])
             ));
 
             return $game;
         }
         return null;
     }
-
   }
