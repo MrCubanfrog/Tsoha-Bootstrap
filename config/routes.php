@@ -48,3 +48,8 @@
         HelloWorldController::login();
     });
    
+    $routes->post('/login', function(){
+        HelloWorldController::handle_login();
+    });
+   
+
