@@ -31,13 +31,13 @@ CREATE TABLE player_character (
 	description_short VARCHAR(128),
 	description TEXT,
 	history TEXT,
-	gm_note TEXT,
+	gm_note TEXT
 );
 
-CREATE TABLE game_users(
+CREATE TABLE game_users (
 	user_id INTEGER REFERENCES site_user(id),
 	game_id INTEGER REFERENCES game(id),
-	gamemaster BOOLEAN
+	gamemaster BOOLEAN,
 	PRIMARY KEY(user_id, game_id)
 );
 

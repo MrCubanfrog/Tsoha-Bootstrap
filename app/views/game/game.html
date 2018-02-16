@@ -1,22 +1,43 @@
 {% extends "base.html" %}
 {% block content %}
-    <p>
-        <a href="{{base_path}}/game/{{game.id}}/edit" class="btn btn-default">Muokkaa</a>
-    </p>
     <h1>{{game.name}}</h1>
     {{game.description}}
 
     <h1>Hahmot</h1>
-    {% for character in characters%}
+    {% for character in characters %}
         <h2><a href="{{base_path}}/character/{{character.id}}">{{character.name}}</a></h2>
         {{character.description_short}}
     {% endfor %}
 
     <h1>Sessiot</h1>
-    <p>
-        <a href="#" class="btn btn-success">Uusi peli</a>
-    </p>
 
+    {% if user_logged_in %}
+        {% for game_user in game_users %}
+            {% if user_logged_in.id == game_user.user_id %}
+            <p>
+                <a href="{{base_path}}/character/new/{{game.id}}" class="btn btn-success">Uusi hahmo</a>
+                {% if game_user.gamemaster %}
+                    <a href="#" class="btn btn-success">Uusi sessio</a>
+                    <a href="#" class="btn btn-success">Uusi artikkeli</a>
+                    <a href="{{base_path}}/game/{{game.id}}/edit" class="btn btn-default">Muokkaa</a>
+                {% endif %}
+            </p>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+    {% if user_logged_in %}
+        {% for game_user in game_users %}
+            {% if user_logged_in.id == game_user.user_id %}
+                {% if game_user.gamemaster %}
+                    <h2>Pelinjohtajan Muistiinpanot</h2>
+                    {{game.gm_note}}
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+    <h1>Tapahtuneet Sessiot</h1>
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
@@ -32,5 +53,4 @@
                 <th><a href="{{base_path}}/session/{{game.id}}/" class="btn btn-success">Sivulle</a></th>
             </tr>
         </tbody>
-
 {% endblock %}

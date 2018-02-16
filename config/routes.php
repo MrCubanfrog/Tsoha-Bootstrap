@@ -11,6 +11,7 @@
     $routes->post('/game', function(){
         GamesController::store();
     });
+   
     $routes->get('/game/new', function(){
         GamesController::create();
     });
@@ -31,20 +32,36 @@
         GamesController::show($id);
     });
 
+    $routes->post('/character/new/:id', function($id){
+        CharacterController::store($id);
+    });
+
+    $routes->get('/character/new/:id', function($id){
+        CharacterController::create($id);
+    });
+
+    $routes->get('/character/:id/edit', function($id){
+        CharacterController::edit($id);
+    });
+
+    $routes->post('/character/:id/edit', function($id){
+        CharacterController::update($id);
+    });
+
+    $routes->post('/character/:id/destroy', function($id){
+        CharacterController::destroy($id);
+    });
+
+    $routes->get('/character/:id', function($id){
+        CharacterController::show($id);
+    });
+
     $routes->get('/article/1', function(){
         HelloWorldController::article();
     });
 
     $routes->get('/article_mod/1', function(){
         HelloWorldController::article_mod();
-    });
-
-    $routes->get('/player/1', function(){
-        HelloWorldController::player();
-    });
-
-    $routes->get('/player_mod/1', function(){
-        HelloWorldController::player_mod();
     });
 
     $routes->get('/session/1', function(){
@@ -56,7 +73,15 @@
     });
 
     $routes->get('/login', function(){
-        HelloWorldController::login();
+        UserController::login();
     });
-    
    
+    $routes->post('/login', function(){
+        UserController::handle_login();
+    });
+
+    $routes->post('/logout', function(){
+        UserController::logout();
+    });
+
+

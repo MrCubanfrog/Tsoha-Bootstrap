@@ -15,8 +15,6 @@
                 <th>Nimi</th>
                 <th>Systeemi</th>
                 <th>Kuvaus</th>
-                <th>Viimeisin päivitys</th>
-                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -25,8 +23,6 @@
                     <td><a href="{{base_path}}/game/{{game.id}}">{{game.name}}</td>
                     <td>{{game.system}}</td>
                     <td>{{game.description_short}}</td>
-                    <td>{{game.creation_info.creation_date}}</td>
-                    <td><a class="btn btn-success" href="{{base_path}}/game/{{game.id}}/edit">Muokkaa</a></td>
                 </tr>
             {% endfor %}
         </tbody>

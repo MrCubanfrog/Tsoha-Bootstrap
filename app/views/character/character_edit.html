@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1>Lisää peli sivustolle</h1>
     {% if errors %}
         <div class="alert alert-danger">
             <ul>
@@ -10,22 +9,23 @@
             </ul>
         </div>
     {% endif %}
-    <form method="post" action="{{base_path}}/game">
+    <h1>Muokkaa Hahmoa {{character.name}}</h1>
+    <form method="post" action="{{base_path}}/character/{{character.id}}/edit">
         <div class="form-group">
-            <label>Pelin Nimi</label>
-            <input name="name" class="form-control" type="text">
+            <label>Nimi</label>
+            <input class="form-control" value={{character.name}} name="name" type="text">
         </div>
-        <div class="form-group">
-            <label>Systeemi</label>
-            <input name="system" class="form-control" type="text">
+         <div class="form-group">
+            <label>Lyhyt kuvaus</label>
+            <input class="form-control" value={{character.description_short}} name="description_short" type="text">
         </div>
-        <div class="form-group">
-            <label>Lyhyt Kuvaus</label>
-            <input name="description_short" class="form-control" type="text">
-        </div>
-        <div class="form-group">
+         <div class="form-group">
             <label>Kuvaus</label>
-            <input name="description" class="form-control" type="text">
+            <input class="form-control" value={{character.description}} name="description" type="text">
+        </div>
+         <div class="form-group">
+            <label>Historia</label>
+            <input class="form-control" value={{character.history}} type="text" name="history">
         </div>
         {% if user_logged_in %}
             {% for game_user in game_users %}
@@ -33,7 +33,7 @@
                     {% if game_user.gamemaster %}
                         <div class="form-group">
                             <label>Gm tiedot</label>
-                            <input name="gm_note" class="form-control" type="text">
+                            <input name="gm_note" class="form-control" type="text" tetxt={{character.gm_note}}>
                         </div>
                     {% endif %}
                 {% endif %}
@@ -42,5 +42,7 @@
         <div class="form-group">
             <button type="submit" class="btn btn-primary">Tallenna</button>
         </div>
+    </form>
+    <form method="post" action="{{base_path}}/character/{{character.id}}/destroy">
     </form>
 {% endblock %}

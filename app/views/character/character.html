@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+    {% if user_logged_in %}
+        {% for game_user in game_users %}
+            {% if user_logged_in.id == game_user.user_id %}
+                {% if game_user.gamemaster or character.user_id == user_logged_in.id%}
+                    <a href="{{base_path}}/character/{{character.id}}/edit" class="btn btn-default">Muokkaa</a>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+    <h1>{{character.name}}</h1>
+    {{character.description}}
+    <h2>Historia</h2>
+    {{character.history}}
+    {% if user_logged_in %}
+        {% for game_user in game_users %}
+            {% if user_logged_in.id == game_user.user_id %}
+                {% if game_user.gamemaster %}
+                    <h2>Gm tiedot</h2>
+                    {{character.gm_note}}
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+{% endblock %}
