@@ -11,7 +11,7 @@
     public static function edit($id) {
         self::check_logged_in();
         $character = Character::find($id);
-        $game_users = GameUser::findForGame($character->id);
+        $game_users = GameUser::findForGame($character->game_id);
         View::make('character/character_edit.html', array('character'=>$character, 'game_users'=> $game_users));
     }
 
@@ -19,6 +19,7 @@
         self::check_logged_in();
         $params = $_POST;
         $gm_note = "";
+        
 
         if (array_key_exists('gm_note', $params)) {
             $gm_note = $params['gm_note'];
@@ -26,7 +27,6 @@
 
         $attributes = array(
             'id' => $id,
-            'user_id' => $user->id,
             'name' => $params['name'],
             'description_short' => $params['description_short'],
             'description' => $params['description'],
@@ -35,7 +35,7 @@
         );
 
         $character = new Character($attributes);
-        $errors = $game->errors();
+        $errors = $character->errors();
 
         if (count($errors) == 0) {
             $character->update();
@@ -47,11 +47,11 @@
 
     public static function destroy($id) {
         self::check_logged_in();
-        $character = new Character(array('id' => $id));
+        $character = Character::find($id);
+        $game_id = $character->game_id;
         $character->destroy();
 
-        Redirect::to('/', array('message' => 'Hahmo on poistettu onnistuneesti!'));
-
+        Redirect::to('/game/' . $game_id, array('message' => 'Hahmo on poistettu onnistuneesti!'));
     }
 
     public static function store($game_id) {

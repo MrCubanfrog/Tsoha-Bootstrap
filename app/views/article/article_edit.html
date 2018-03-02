@@ -9,23 +9,19 @@
             </ul>
         </div>
     {% endif %}
-    <h1>Muokkaa Hahmoa {{character.name}}</h1>
-    <form method="post" action="{{base_path}}/character/{{character.id}}/edit">
+    <h1>Muokkaa Artikkelia {{article.name}}</h1>
+    <form method="post" action="{{base_path}}/article/{{article.id}}/edit">
         <div class="form-group">
             <label>Nimi</label>
-            <input class="form-control" value="{{character.name}}" name="name" type="text">
+            <input class="form-control" value="{{article.name}}" name="name" type="text">
         </div>
          <div class="form-group">
             <label>Lyhyt kuvaus</label>
-            <input class="form-control" value="{{character.description_short}}" name="description_short" type="text">
+            <input class="form-control" value="{{article.description_short}}" name="description_short" type="text">
         </div>
-         <div class="form-group">
+        <div class="form-group">
             <label>Kuvaus</label>
-            <input class="form-control" value="{{character.description}}" name="description" type="text">
-        </div>
-         <div class="form-group">
-            <label>Historia</label>
-            <input class="form-control" value="{{character.history}}" type="text" name="history">
+            <input class="form-control" value="{{article.description}}" name="description" type="text">
         </div>
         {% if user_logged_in %}
             {% for game_user in game_users %}
@@ -33,7 +29,7 @@
                     {% if game_user.gamemaster %}
                         <div class="form-group">
                             <label>Gm tiedot</label>
-                            <input name="gm_note" class="form-control" type="text" value="{{character.gm_note}}">
+                            <input name="gm_note" class="form-control" type="text" value="{{article.gm_note}}">
                         </div>
                     {% endif %}
                 {% endif %}
@@ -43,7 +39,7 @@
             <button type="submit" class="btn btn-primary">Tallenna</button>
         </div>
     </form>
-    <form method="post" action="{{base_path}}/character/{{character.id}}/destroy">
+    <form method="post" action="{{base_path}}/article/{{article.id}}/destroy">
         <button type="submit" class="btn btn-danger">Poista</button>
     </form>
 {% endblock %}

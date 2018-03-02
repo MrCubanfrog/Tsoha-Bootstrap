@@ -37,6 +37,23 @@
             return null;
 
         }
+
+        public static function findAll() {
+            $query = DB::connection()->prepare('SELECT * FROM site_user');
+            $query->execute();
+            $rows = $query->fetchAll();
+            $users = array();
+
+            foreach($rows as $row) {
+                $users[] = new User(array(
+                    'id' => $row['id'],
+                    'name' => $row['name'],
+                    'password' => 'no password here',
+                ));
+
+            }
+            return $users;
+        }
  
         public static function authenticate($username, $password) {
             $query = DB::connection()->prepare('SELECT * FROM site_user WHERE name = :name AND password = :password LIMIT 1;');

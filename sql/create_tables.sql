@@ -19,6 +19,7 @@ CREATE TABLE game_session (
 	id SERIAL PRIMARY KEY,
 	game_id INTEGER REFERENCES game(id),
 	name VARCHAR(64),
+    description_short VARCHAR(128),
 	description TEXT,
 	gm_note TEXT
 );
@@ -45,6 +46,7 @@ CREATE TABLE article (
 	id SERIAL PRIMARY KEY,
 	game_id INTEGER REFERENCES game(id),
 	name VARCHAR(64),
+    description_short VARCHAR(128),
 	description TEXT,
 	gm_note TEXT
 );

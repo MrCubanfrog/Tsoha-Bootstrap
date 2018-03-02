@@ -12,7 +12,9 @@
         $game = Game::find($id);
         $game_users = GameUser::findForGame($id);
         $characters = Character::findAllInGame($id);
-        View::make('game/game.html', array('game' => $game, 'characters' => $characters, 'game_users' => $game_users));
+        $articles = Article::findAllInGame($id);
+        $sessions = Session::findAllInGame($id);
+        View::make('game/game.html', array('game' => $game, 'characters' => $characters, 'game_users' => $game_users, 'articles' => $articles, 'sessions'=> $sessions));
     }
 
     public static function edit($id) {
@@ -78,7 +80,7 @@
             View::make('game/game_new.html', array('errors'=> $errors, 'attributes'=>$attributes)); 
         }
     }
-    
+
     public static function create() {
         self::check_logged_in();
         View::make('game/game_new.html');

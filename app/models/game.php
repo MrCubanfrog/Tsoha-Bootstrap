@@ -73,6 +73,16 @@
         $this->id = $row['id'];
     }
 
+    public function remove_user($user_id) {
+        $query = DB::connection()->prepare('DELETE FROM game_users WHERE game_id = :game_id AND user_id = :user_id');
+        $query->execute(array('game_id' => $this->id, 'user_id' => $user_id));
+    }
+
+    public function add_user($user_id) {
+        $query = DB::connection()->prepare('INSERT INTO game_users (user_id, game_id, gamemaster) VALUES (:user_id, :game_id, False)');
+        $query->execute(array('game_id' => $this->id, 'user_id' => $user_id));
+    }
+
     public static function find($id) {
         $query = DB::connection()->prepare('SELECT * FROM game WHERE id = :id');
         $query->execute(array('id'=>$id));

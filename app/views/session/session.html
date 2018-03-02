@@ -1,26 +1,25 @@
 {% extends "base.html" %}
 {% block content %}
-    <a href="{{base_path}}/game/{{character.game_id}}" class="btn btn-default">Takaisin Peliin</a>
+    <a href="{{base_path}}/game/{{session.game_id}}" class="btn btn-default">Takaisin Peliin</a>
+
     {% if user_logged_in %}
         {% for game_user in game_users %}
             {% if user_logged_in.id == game_user.user_id %}
-                {% if game_user.gamemaster or character.user_id == user_logged_in.id%}
-                    <a href="{{base_path}}/character/{{character.id}}/edit" class="btn btn-default">Muokkaa</a>
+                {% if game_user.gamemaster %}
+                    <a href="{{base_path}}/session/{{session.id}}/edit" class="btn btn-default">Muokkaa</a>
                 {% endif %}
             {% endif %}
         {% endfor %}
     {% endif %}
 
-    <h1>{{character.name}}</h1>
-    {{character.description}}
-    <h2>Historia</h2>
-    {{character.history}}
+    <h1>{{session.name}}</h1>
+    {{session.description}}
     {% if user_logged_in %}
         {% for game_user in game_users %}
             {% if user_logged_in.id == game_user.user_id %}
                 {% if game_user.gamemaster %}
                     <h2>Gm tiedot</h2>
-                    {{character.gm_note}}
+                    {{session.gm_note}}
                 {% endif %}
             {% endif %}
         {% endfor %}

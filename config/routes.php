@@ -56,20 +56,52 @@
         CharacterController::show($id);
     });
 
-    $routes->get('/article/1', function(){
-        HelloWorldController::article();
+    $routes->post('/session/new/:id', function($id){
+        SessionController::store($id);
     });
 
-    $routes->get('/article_mod/1', function(){
-        HelloWorldController::article_mod();
+    $routes->get('/session/new/:id', function($id){
+        SessionController::create($id);
     });
 
-    $routes->get('/session/1', function(){
-        HelloWorldController::session();
+    $routes->get('/session/:id/edit', function($id){
+        SessionController::edit($id);
     });
 
-    $routes->get('/session_mod/1', function(){
-        HelloWorldController::session_mod();
+    $routes->post('/session/:id/edit', function($id){
+        SessionController::update($id);
+    });
+
+    $routes->post('/session/:id/destroy', function($id){
+        SessionController::destroy($id);
+    });
+
+    $routes->get('/session/:id', function($id){
+        SessionController::show($id);
+    });
+
+    $routes->post('/article/new/:id', function($id){
+        ArticleController::store($id);
+    });
+
+    $routes->get('/article/new/:id', function($id){
+        ArticleController::create($id);
+    });
+
+    $routes->get('/article/:id/edit', function($id){
+        ArticleController::edit($id);
+    });
+
+    $routes->post('/article/:id/edit', function($id){
+        ArticleController::update($id);
+    });
+
+    $routes->post('/article/:id/destroy', function($id){
+        ArticleController::destroy($id);
+    });
+
+    $routes->get('/article/:id', function($id){
+        ArticleController::show($id);
     });
 
     $routes->get('/login', function(){
@@ -84,4 +116,15 @@
         UserController::logout();
     });
 
+    $routes->get('/game/:id/users', function($id){
+        UserController::handle_user_screen($id);
+    });
+
+    $routes->post('/game/:id/add_user/:user_id', function($id, $user_id){
+        UserController::add_user_to_game($id, $user_id);
+    });
+
+    $routes->post('/game/:id/remove_user/:user_id', function($id, $user_id){
+        UserController::remove_user_from_game($id, $user_id);
+    });
 

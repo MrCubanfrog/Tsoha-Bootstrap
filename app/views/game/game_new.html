@@ -27,18 +27,10 @@
             <label>Kuvaus</label>
             <input name="description" class="form-control" type="text">
         </div>
-        {% if user_logged_in %}
-            {% for game_user in game_users %}
-                {% if user_logged_in.id == game_user.user_id %}
-                    {% if game_user.gamemaster %}
-                        <div class="form-group">
-                            <label>Gm tiedot</label>
-                            <input name="gm_note" class="form-control" type="text">
-                        </div>
-                    {% endif %}
-                {% endif %}
-            {% endfor %}
-        {% endif %}
+        <div class="form-group">
+            <label>Gm tiedot</label>
+            <input name="gm_note" class="form-control" type="text">
+        </div>
         <div class="form-group">
             <button type="submit" class="btn btn-primary">Tallenna</button>
         </div>
